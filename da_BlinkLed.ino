@@ -1,4 +1,4 @@
-/* blinking led */
+// blinking led
 // one led
 // one R220 (if pin is not 13)
 
