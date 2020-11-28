@@ -1,4 +1,4 @@
-// calculate how many people is insdide a place
+// calculate how many people is insdide a place with a laser
 // 1 Led laser
 // 1 R1KHOhm
 // 1 Led red (for signal)
