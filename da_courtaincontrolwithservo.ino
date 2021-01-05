@@ -20,12 +20,12 @@ void loop() {
    Serial.println(value); // print
    delay(1000);
    if (value <=sensibility) {
-       courtain_engine.write(180); // turn on and courtain will be opened
+       courtain_engine.write(RIGHT_MOVEMENT); // turn on and courtain will be opened
        delay (3000); // during 3 seconds. ADJUST DEPENDING OF THE SIZE OF THE COURTAIN
-       courtain_engine.write(90); // stop the engine
+       courtain_engine.write(STOP_MOVEMENT); // stop the engine
    } else {
-       courtain_engine.write(0); // turn on and courtain will be closed
+       courtain_engine.write(LEFT_MOVEMENT); // turn on and courtain will be closed
        delay (3000); // during 3 seconds. ADJUST DEPENDING OF THE SIZE OF THE COURTAIN
-       courtain_engine.write(90); // stop the engine
+       courtain_engine.write(STOP_MOVEMENT); // stop the engine
    }
 }

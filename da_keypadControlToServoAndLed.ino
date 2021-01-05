@@ -9,14 +9,15 @@
 
 #include <Keypad.h>
 #include <Servo.h>
+// #include <./Constants.h>
 const byte ROWS=4;
 const byte COLS=3;
 
 char keys[ROWS][COLS] = {
-    {`1´, `2´, `3´},
-    {`4´, `5´, `6´},
-    {`7´, `8´, `9´},
-    {`*´, `0´, `#´}   
+    {'1', '2', '3'},
+    {'4', '5', '6'},
+    {'7', '8', '9'},
+    {'*', '0', '#'}   
 };
 byte rowPins[ROWS]= {5,4,3,2}; // Arduino pins for Rows
 byte colPins[COLS]={8,7,6}; // Arduino pins for Columns

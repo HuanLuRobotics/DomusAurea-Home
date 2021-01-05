@@ -9,13 +9,11 @@
 
 #include <IRremote.h>
 #include <Servo.h>
+#include <Constants.h>
 
 int RECV_PIN = 11;
 IRrecv ir(RECV_PIN);
 decode_results results; // to store the remote result
-int rightTurn = 180; // value to move the servo to the rigth
-int leftTurn = 0; // value to move the servo to the left
-int stopMove = 90; // value to move the servo to the stop
 
 Servo rightServo;
 Servo leftServo;
@@ -34,35 +32,35 @@ void loop() {
         ir.resume(); // receive the next key
     }
     if (results.value == 16724685) { // up, then move both servos in the same direction
-        rightServo.write(rightTurn);
-        leftServo.write(leftTurn);
+        rightServo.write(RIGHT_MOVEMENT);
+        leftServo.write(LEFT_MOVEMENT);
         if (results.value == 4294967295) {
-            rightServo.write(rightTurn);
-            leftServo.write(leftTurn);
+            rightServo.write(RIGHT_MOVEMENT);
+            leftServo.write(LEFT_MOVEMENT);
         }
     }
     if (results.value == 16740495) { // left, then move left servo to the right, and left stop
         rightServo.write(rightTurn);
         leftServo.write(stopMove);
         if (results.value == 4294967295) {
-            rightServo.write(rightTurn);
-            leftServo.write(stopMove);
+            rightServo.write(RIGHT_MOVEMENT);
+            leftServo.write(STOP_MOVEMENT);
         }
     }
     if (results.value == 16740495) { // right, then move right servo to the left and right stop
-        rightServo.write(stopMove);
-        leftServo.write(leftTurn);
+        rightServo.write(STOP_MOVEMENT);
+        leftServo.write(LEFT_MOVEMENT);
         if (results.value == 4294967295) {
-            rightServo.write(stopMove);
-            leftServo.write(leftTurn);
+            rightServo.write(STOP_MOVEMENT);
+            leftServo.write(LEFT_MOVEMENT);
         }
     }
     if (results.value == 16740495) { // stop, then stop both servos
-        rightServo.write(stopMove);
-        leftServo.write(stopMove);
+        rightServo.write(STOP_MOVEMENT);
+        leftServo.write(STOP_MOVEMENT);
         if (results.value == 4294967295) {
-            rightServo.write(stopMove);
-            leftServo.write(stopMove);
+            rightServo.write(STOP_MOVEMENT);
+            leftServo.write(STOP_MOVEMENT);
         }
     }
 }
