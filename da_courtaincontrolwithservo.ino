@@ -4,9 +4,11 @@
 // 2 resistance (one per each button)
 // the courtain
 #include <Servo.h>
+#include <Constants.h>
+
 int ldr = A0; // set pin Analogic0 for the Light Sensor
 int sensibility = 95; // set sensibility level
-itn value = 0; // set value to 0 for ldr
+int value = 0; // set value to 0 for ldr
 Servo courtain_engine;
 
 void setup () {

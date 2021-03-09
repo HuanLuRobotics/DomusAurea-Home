@@ -10,7 +10,7 @@ int value= 0; // variable for value
 int led=4; // pint 4
 
 void setup() {
-    Serial.begin();
+    Serial.begin(9600);
     pinMode (laser,OUTPUT); // pin
     pinMode (led,OUTPUT); // pin
     pinMode (ldr,INPUT); // pin

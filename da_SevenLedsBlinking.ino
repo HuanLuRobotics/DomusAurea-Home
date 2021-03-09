@@ -1,3 +1,5 @@
+#include <Key.h>
+
 /* Seven leds blinking alternatively */
 // Seven leds
 // 7 R220

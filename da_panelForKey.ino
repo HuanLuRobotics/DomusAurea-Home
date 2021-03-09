@@ -5,6 +5,8 @@
 
 #include <Keypad.h>
 #include <LiquidCrystal.h>
+#include <Constanst.h>
+
 
 LiquidCrystal lcd (8,9,10,11,12,13);
 const byte ROWS = 4; // 4 columns

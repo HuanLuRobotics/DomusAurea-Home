@@ -17,7 +17,7 @@ void setup() {
 }
 
 void loop() {
-    vb=digitalread(button);
+    vb=digitalRead(button);
     if (vb==HIGH) {
         for (int i=0; i<10;i++) { // buzzer 10 times
             delay(220);

@@ -23,7 +23,7 @@ void loop () {
     if (value >=11) {
         engine.write (180); // enable
     }
-    if (value < 5V) {
+    if (value < 5) {
         engine.write (90); // disable
     }
 }
