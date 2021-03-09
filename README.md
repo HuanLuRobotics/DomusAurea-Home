@@ -5,7 +5,10 @@ This set of Arduino programs are built to control the different elements in a Do
 
 It also includes a Surveillance Robot application to handle the supervision of the house
 
-Rules:
+Rules (for Security purpose):
 - NO doors will be controlled
 - Preferibly, using X10 protocol and not Wifi protocol to join the elements with the panel
   
+The "DomusAurea Home" is part of the "DomusAurea" platform
+
+
