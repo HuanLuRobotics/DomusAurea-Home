@@ -3,7 +3,7 @@ The DomusAurea Domotic application
 .
 This set of Arduino programs are built to control the different elements in a Domotic installation.
 
-It also includes a Surveillance Robot application to handle the supervision of the house
+It also will include a [Surveillance Robot](https://github.com/HuanLuRobotics/DomusAurea-Assistant) application to handle the supervision of the house
 
 Rules (for Security purpose):
 - NO doors will be controlled
