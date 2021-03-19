@@ -3,14 +3,16 @@
 // 1 R220
 //1 led
 
-int button = 7;
-int led=13; 
+#include <Constants.h>
+
+const byte PIN_BUTTON = 7;
+const byte PIN_LED=13; 
 int vb=0;
 
 void setup () {
-    pinMode(button, INPUT);
-    pinMode(led, OUTPUT);
-    Serial.begin(9600);
+    pinMode(PIN_BUTTON, INPUT);
+    pinMode(PIN_LED, OUTPUT);
+    Serial.begin(SERIAL_RATE);
     attachInterrupt(0, blinking, HIGH); // this instruction will handle the interruptions
 }
 
@@ -21,10 +23,10 @@ void loop () {
 }
 
 void blinking () { // function to do something
-    vb=digitalRead(button);
+    vb=digitalRead(PIN_BUTTON);
     if (vb==HIGH) {
-        digitalWrite(led, HIGH);
+        digitalWrite(PIN_LED, HIGH);
     } else {
-        digitalWrite(led, LOW);
+        digitalWrite(PIN_LED, LOW);
     }
 }

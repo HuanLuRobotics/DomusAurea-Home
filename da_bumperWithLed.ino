@@ -3,22 +3,22 @@
 // 1 R220 or 1 R330
 // 1 led
 
-int bumper = 8; // pin 8 to bumper
+const byte PIN_BUMPER = 8; // pin 8 to bumper
+const byte PIN_LED = 13; // pin 13 to led
 int data = 0; // variable for data
-int led = 13; // pin 13 to led
 
 void setup () {
-    pinMode(led, OUTPUT);
-    pinMode(bumper, INPUT);
+    pinMode(PIN_LED, OUTPUT);
+    pinMode(PIN_BUMPER, INPUT);
 }
 
 void loop () {
-    data = digitalRead(bumper);
+    data = digitalRead(PIN_BUMPER);
     if (data == HIGH) {
-        digitalWrite(led, HIGH);
+        digitalWrite(PIN_LED, HIGH);
     }
-    data = digitalRead(bumper);
+    data = digitalRead(PIN_BUMPER);
     if (data == LOW) {
-        digitalWrite(led, LOW);
+        digitalWrite(PIN_LED, LOW);
     }
 }

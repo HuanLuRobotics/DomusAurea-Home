@@ -2,15 +2,16 @@
 // one led
 // one R220 (if pin is not 13)
 
-int led = 13; // pin 13
+#include <Constants.h>
+const byte PIN_LED = 13; // pin 13
 
 void setup() {
-    pinMode(led, OUTPUT); // pin 13 as output
+    pinMode(PIN_LED, OUTPUT); // pin 13 as output
 }
 
 void loop () {
-    digitalWrite(led, HIGH); // when is 5V, light will be on
-    delay(1000); // wait
-    digitalWrite(led, LOW); // when is 5V, light will be off
-    delay(1000); // wait
+    digitalWrite(PIN_LED, HIGH); // when is 5V, light will be on
+    delay(ONE_SECOND); // wait
+    digitalWrite(PIN_LED, LOW); // when is 5V, light will be off
+    delay(ONE_SECOND); // wait
 }

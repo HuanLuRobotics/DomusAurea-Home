@@ -3,14 +3,15 @@
 // 1 TSOP 4838
 // Remote control device
 
+#include <Constants.h>
 #include <IRremote.h>
 
-int RECV_PIN = 7;
-IRrecv ir(RECV_PIN);
+const byte PIN_RECV = 7;
+IRrecv ir(PIN_RECV);
 decode_results result; // to store the remote result
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(SERIAL_RATE);
     ir.enableIRIn(); // enable the device
 }
 

@@ -3,23 +3,26 @@
 // 1 R220 or 1 R330
 // 1 Servo 360
 
+#include <Constants.h>
 #include <Servo.h>
+
 Servo engine;
-int bumper = 8; // pin 8 to bumper
-int data = 0; // variable for data
+const byte PIN_BUMPER = 8; 
+const byte PIN_ENGINE = 11; 
+int data = 0;
 
 void setup () {
-    pinMode(bumper, INPUT);
-    engine.attach(11);
+    pinMode(PIN_BUMPER, INPUT);
+    engine.attach(PIN_ENGINE);
 }
 
 void loop () {
-    data = digitalRead(bumper);
+    data = digitalRead(PIN_BUMPER);
     if (data == HIGH) {
         engine.write(20);
     }
-    data = digitalRead(bumper);
+    data = digitalRead(PIN_BUMPER);
     if (data == LOW) {
-        engine.write(90); // stop the servo
+        engine.write(STOP_MOVEMENT);
     }
 }

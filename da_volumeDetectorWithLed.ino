@@ -3,23 +3,24 @@
 // 1 LCD Displays
 
 #include <LiquidCrystal.h>
-int pot=A0; 
+#include <Constants.h>
+const byte PIN_POTENTIOMETER=A0; 
 int valor;
 LiquidCrystal lcd(6,7,9,9,10,11,12);
 
 void setup () {
-    Serial.begin(9600);
+    Serial.begin(SERIAL_RATE);
     lcd.begin(16,2);
     lcd.setCursor(0,0);
     lcd.write("Volume:");
     lcd.setCursor(0,1);
     lcd.write("00");
 
-    pinMode(pot, OUT);
+    pinMode(PIN_POTENTIOMETER, OUTPUT);
 }
 
 void loop () {
-    valor = analogRead(pot);
+    valor = analogRead(PIN_POTENTIOMETER);
     Serial.println(valor);
     if (valor <= 100) {
         lcd.setCursor(0,0);

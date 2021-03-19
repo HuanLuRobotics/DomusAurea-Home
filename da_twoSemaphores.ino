@@ -2,12 +2,12 @@
 // 6 Leds (2 green, 2 red, 2 amber)
 // 6 R220 
 
-int r1=7; // red semaphore 1
-int a1=8; // amber semaphore 1
-int g1=6; // green semaphore 1
-int r2=10; // red semaphore 2
-int a2=11; // amber semaphore 2
-int g1=12; // green semaphore 2
+const byte r1=7; // red semaphore 1
+const byte a1=8; // amber semaphore 1
+const byte g1=6; // green semaphore 1
+const byte r2=10; // red semaphore 2
+const byte a2=11; // amber semaphore 2
+const byte g2=12; // green semaphore 2
 
 void setup () {
     pinMode (r1, OUTPUT); // r1 as output

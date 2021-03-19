@@ -3,22 +3,24 @@
 // 1 servoEngine
 // 2 resistance (one per each button)
 // the courtain
-#include <Servo.h>
-#include <Constants.h>
 
-int ldr = A0; // set pin Analogic0 for the Light Sensor
+#include <Constants.h>
+#include <Servo.h>
+
+const byte PIN_LDR = A0; // set pin Analogic0 for the Light Sensor
+const byte PIN_SERVO = 7; // set pin 7 for Servo
 int sensibility = 95; // set sensibility level
 int value = 0; // set value to 0 for ldr
 Servo courtain_engine;
 
 void setup () {
-   Serial.begin(9600);
-   pinMode(ldr,INPUT);
-   courtain_engine.attach(7); // servo controlled by pin 7
+   Serial.begin(SERIAL_RATE);
+   pinMode(PIN_LDR,INPUT);
+   courtain_engine.attach(PIN_SERVO);
 }
 
 void loop() {
-   value = analogRead (ldr); // read ldr value and store value
+   value = analogRead (PIN_LDR); // read ldr value and store value
    Serial.println(value); // print
    delay(1000);
    if (value <=sensibility) {

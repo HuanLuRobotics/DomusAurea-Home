@@ -10,7 +10,7 @@ void setup() {
     lcd.begin(16,2); // start LCD with 2 actives lines
 
     lcd.setCursor(0,0); // enable test in the first line of the LCD
-    lcd.write("Demo LCDP display"); //
+    lcd.write("Demo LCD display"); //
     lcd.setCursor(0,1); // enable test in the second line of the LCD
     lcd.write("================="); //
 }

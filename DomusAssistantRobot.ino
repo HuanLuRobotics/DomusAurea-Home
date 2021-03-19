@@ -21,45 +21,45 @@
 // TODO: Movements with wheels and engines and IR controller
 // TODO: Ultrasound decoder to be autonomous
 
+#include <Constants.h>
 #include <Servo.h>
 #include <NewPing.h>
 
-#define TRIGGER_PIN 12; // trigger of distance sensor
-#define ECHO_PIN 11; // echo of distance sensor
-#define MAX_DISTANCE 200 ; // max distance 200 cm
+const byte PIN_TRIGGER=12; // trigger of distance sensor
+const byte PIN_ECHO=11; // echo of distance sensor
+const int MAX_DISTANCE=200 ; // max distance 200 cm
 
 int dist= 0; // distance to an object in straigh line
 int value = 0; // values of the CNY-70 sensor
-int greenled8mm = 10; //
-int cny=A0; //
-int greenled=9; // pin to the green led 5 mm
-int redled=8; // pin to the red led 5 mm
-int buzzer=3; // pin to the buzzer
+
+const byte PIN_LED_GREEN_8MM = 10; // green led 8mm
+const byte PIN_CNY=A0; //
+const byte PIN_LED_GREEN=9; // green led 5 mm
+const byte PIN_LED_RED=8; // red led 5 mm
+const byte PIN_BUZZER=3;
+const byte PIN_SERVO=7;
 unsigned int tmp; // to store the ping time
 
-NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+NewPing sonar(PIN_TRIGGER, PIN_ECHO, MAX_DISTANCE);
 
-int leftMove=0;
-int stopMove=90;
-int rightMove= 180;
 Servo headServo; // servo to control the head movement
 
 void setup() {
-    Serial.begin(9600);
-    pinMode(cny,INPUT);
-    pinMode(greenled8mm, OUTPUT);
-    pinMode(greenled, OUTPUT);
-    pinMode(redled, OUTPUT);
-    pinMode(buzzer, OUTPUT);
-    headServo.attach(7);
+    Serial.begin(SERIAL_RATE);
+    pinMode(PIN_CNY,INPUT);
+    pinMode(PIN_LED_GREEN_8MM, OUTPUT);
+    pinMode(PIN_LED_GREEN, OUTPUT);
+    pinMode(PIN_LED_RED, OUTPUT);
+    pinMode(PIN_BUZZER, OUTPUT);
+    headServo.attach(PIN_SERVO);
     // set Start on Robot
-    digitalWrite(greenled8mm, HIGH);
-    digitalWrite(greenled, HIGH;
-    digitalWrite(redled, HIGH);
+    digitalWrite(PIN_LED_GREEN_8MM, HIGH);
+    digitalWrite(PIN_LED_GREEN, HIGH;
+    digitalWrite(PIN_LED_RED, HIGH);
     delay(200);
-    digitalWrite(greenled8mm, LOW);
-    digitalWrite(greenled, LOW);
-    digitalWrite(redled, LOW);
+    digitalWrite(PIN_LED_GREEN_8MM, LOW);
+    digitalWrite(PIN_LED_GREEN, LOW);
+    digitalWrite(PIN_LED_RED, LOW);
     tone(buzzer, 950,900); // make a sound
     delay(200);
     noTone(buzzer);
@@ -69,26 +69,26 @@ void setup() {
 }
 
 void loop () {
-    value = analogRead (cny);
+    value = analogRead (PIN_CNY);
     Serial.println(value);
     delay(100);
-    digitalWrite(greenled, LOW);
-    digitalWrite(redled, LOW);
+    digitalWrite(PIN_LED_GREEN, LOW);
+    digitalWrite(PIN_LED_RED, LOW);
     if (value >=80 && value >=260) { // it is detecting black colour
-       digitalWrite(greenled, HIGH);
-       digitalWrite(redled, LOW);
+       digitalWrite(PIN_LED_GREEN, HIGH);
+       digitalWrite(PIN_LED_RED, LOW);
        tono_no_correcto();
     }
     if (value > 600 && value < 966) { // it is detecting white colour
-       digitalWrite(greenled, LOW);
-       digitalWrite(redled, HIGH);
+       digitalWrite(PIN_LED_GREEN, LOW);
+       digitalWrite(PIN_LED_RED, HIGH);
        tono_correcto();
     }
     if (value > 6 && value <=30) { // TODO: depending on the light these values might be different
-       digitalWrite(greenled, LOW);
-       digitalWrite(redled, LOW);
+       digitalWrite(PIN_LED_GREEN, LOW);
+       digitalWrite(PIN_LED_RED, LOW);
     }
-    headServo.write(90); // center serv
+    headServo.write(CENTER_MOVEMENT); // center serv
     delay(50); //
     tmp=sonar.ping();
     dist=tmp/US_ROUNDTRIP_CM;
@@ -96,19 +96,19 @@ void loop () {
     Serial.print(dist);
     Serial.println("cm.");
     if (dist==0) { // we need to clean possible wrong values
-       digitalWrite(greenled8mm, LOW);
+       digitalWrite(PIN_LED_GREEN_8MM, LOW);
     }
     if (dist >=55 && dist <= 65) { // robot will move head to make "happiness"
-       digitalWrite(greenled8mm, HIGH);
-       headServo.write(180);
+       digitalWrite(PIN_LED_GREEN_8MM, HIGH);
+       headServo.write(RIGHT_MOVEMENT);
        delay(200);
-       headServo.write(90);
+       headServo.write(CENTER_MOVEMENT);
        delay(200);
     } else { 
-       digitalWrite(greenled8mm, LOW);
+       digitalWrite(PIN_LED_GREEN_8MM, LOW);
     }
     if (dist >= 1 && dist <= 54) { 
-        digitalWrite(greenled8mm, HIGH);
+        digitalWrite(PIN_LED_GREEN_8MM, HIGH);
     }
 }
 

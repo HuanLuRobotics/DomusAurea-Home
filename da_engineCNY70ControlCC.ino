@@ -5,25 +5,29 @@
 // 1 Servo (or 2) 360 degrees
 // paper white and paper black for testing purposes
 
+#include <Constants.h>
 #include <Servo.h>
+
 Servo engine; // 360 degreees servo
-int cny=A0; // pin to Analogic0 for sensor measurements
+const byte PIN_CNY=A0; // pin to Analogic0 for sensor measurements
+const byte PIN_SERVO=11; 
 int value = 0; // value to store
 
 void setup () {
-    pinMode(cny, INPUT);
-    engine.attach(11);
-    Serial.begin(9600);
+    pinMode(PIN_CNY, INPUT);
+    engine.attach(PIN_SERVO);
+    Serial.begin(SERIAL_RATE);
 }
 
 void loop () {
-    value = analogRead(cny);
+    value = analogRead(PIN_CNY);
     Serial.println(value);
-    delay(100); //
+    delay(100);
+    
     if (value >=11) {
-        engine.write (180); // enable
+        engine.write (GO_MOVEMENT); // enable
     }
     if (value < 5) {
-        engine.write (90); // disable
+        engine.write (STOP_MOVEMENT); // disable
     }
 }

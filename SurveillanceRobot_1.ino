@@ -14,42 +14,43 @@
 // TODO 4. Sensor to control Humidity
 // TODO 5. Sensor to control Light level
 
+#include <Constants.h>
 #include <NewPing.h>
 #include <IRremote.h>
 #include <Servo.h>
 
-#define TRIGGER_PIN 12; // trigger of distance sensor
-#define ECHO_PIN 11; // echo of distance sensor
-#define MAX_DISTANCE 200 ; // max distance 200 cm
+const byte PIN_TRIGGER=12; // trigger of distance sensor
+const byte PIN_ECHO=11; // echo of distance sensor
+const int MAX_DISTANCE=200; // max distance 200 cm
 
 int dist= 0; // distance to an object in straigh line
 int rightDistance = 0; // distance to an object to the right
 int leftDistance = 0; // distance to an object to the left
 int cont=0; //
 int cont2=0; //
-int pinled=13; //
+const byte PIN_LED=13; //
 
-NewPing sonar(TRIGGER_PIN, ECHO_PIN, MAX_DISTANCE);
+NewPing sonar(PIN_TRIGGER, PIN_ECHO, MAX_DISTANCE);
 
-int rightTurn= 180;
-int leftTurn=0;
-int stopMove=90;
 Servo rightServo;
 Servo leftServo;
 Servo servoBar; // servo to control the scan
+const byte PIN_SERVO_RIGHT = 9;
+const byte PIN_SERVO_LEFT=3;
+const byte PIN_SERVO_BAR=7;
 
-int RECV_PIN = 8; // pin to control IRremote
-IRrecv ir(RECV_PIN); // assign IR with the corresponding pin
+const byte PIN_RECV = 8; // pin to control IRremote
+IRrecv ir(PIN_RECV); // assign IR with the corresponding pin
 decode_results results; // variable to hold results
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(SERIAL_RATE);
     ir.enableIRIn(); // start reception of IR
-    pinMode(pinled, OUTPUT);
-    rightServo.attach(9);
-    leftServo.attach(3);
-    servoBar.attach(7);
-    servoBar.write(90); // to center the ServoBar scan
+    pinMode(PIN_LED, OUTPUT);
+    rightServo.attach(PIN_SERVO_RIGHT);
+    leftServo.attach(PIN_SERVO_LEFT);
+    servoBar.attach(PIN_SERVO_BAR);
+    servoBar.write(CENTER_MOVEMENT); // to center the ServoBar scan
 }
 
 void loop() {
@@ -98,69 +99,61 @@ void doDecodeIR () {
         delay(200); // delay for avoiding double press
         ir.resume(); // to receive next button
     }
-    if (results.value == 3772795063) { // button UP (FORWARD)
+    if (results.value == BT_UP) { 
         doGoForward();
     }
-    if (results.value == 3772829743) { // button LEFT (MOVE-TO-LEFT)
+    if (results.value == BT_LEFT) {
         leftMove();
     }
-    if (results.value == 3772833823) { // button RIGHT (MOVE-TO-RIGHT)
+    if (results.value == BT_RIGHT) {
         rigthMove();
     }
-    if (results.value == 3772778743) { // button DOWN (MOVE-TO-BACK)
+    if (results.value == BT_DOWN) {
         doGoBack();
     }
-    if (results.value == 3772837903) { // button OK (STOP)
-        doGoForward();
+    if (results.value == BT_OK) {
+        doStop();
     }
 // TODO a botton to enter in autonomous mode only when is pressed
 }
 
 void doGoForward () {
-    // rightServo.attach(9);
-    // leftServo.attach(3));
-    rightServo.write(rightTurn);
-    leftServo.write(leftTurn);
+    rightServo.write(RIGHT_MOVEMENT);
+    leftServo.write(LEFT_MOVEMENT);
 }
 
 void doStop () {
-    // leftServo.dettatch(); // this was a way to stop, but really do we needed?
-    // rightServo.dettatch(); // this was a way to stop, but really do we needed?
-    leftServo.write(stopMove);
-    rightServo.write(stopMove);
+    leftServo.write(STOP_MOVEMENT);
+    rightServo.write(STOP_MOVEMENT);
     delay(1500);
 }
 
 void doGoBack() {
-    // rightServo.attach(9);
-    // leftServo.attach(3));
-    rightServo.write(leftTurn);
-    leftServo.write(rightTurn);
+    rightServo.write(LEFT_MOVEMENT);
+    leftServo.write(RIGHT_MOVEMENT);
     delay(1000);
 }
 
-void leftMove() {
-    // leftServo.attach(3));
-    rightServo.write(stopMove);
-    leftServo.write(leftTurn);
+void rigthMove() {
+    rightServo.write(STOP_MOVEMENT);
+    leftServo.write(LEFT_MOVEMENT);
     while (cont<300){
-        leftServo.write(leftTurn);
+        leftServo.write(LEFT_MOVEMENT);
         cont++;
-        servoBar.write(90); // center
+        servoBar.write(CENTER_MOVEMENT);
         Serial.println(cont);
     }
     cont=0;
     cont2=0;
 }
 
-void rightMove() {
-    // rigthServo.attach(9));
-    rightServo.write(rigthTurn);
-    leftServo.write(stopMove);
+void leftMove() {
+    rightServo.write(RIGHT_MOVEMENT);
+    leftServo.write(STOP_MOVEMENT);
     while (cont2<300){
-        rigthServo.write(rigthTurn);
+        rigthServo.write(RIGHT_MOVEMENT);
         cont2++;
-        servoBar.write(90); // center
+        servoBar.write(CENTER_MOVEMENT);
         Serial.println(cont2);
     }
     cont=0;
@@ -168,24 +161,24 @@ void rightMove() {
 }
 
 void rightScan() {
-    servoBar.write(0); //
-    delay(200); //
+    servoBar.write(RIGHT_MOVEMENT);
+    delay(200);
     unsigned int tmp0 = sonar.ping();
     rightDistance = tmp0/ US_ROUNDTRIP_CM;
     delay(1000);
 }
 
 void leftScan() {
-    servoBar.write(180); //
-    delay(200); //
+    servoBar.write(LEFT_MOVEMENT);
+    delay(200);
     unsigned int tmp1 = sonar.ping();
     leftDistance = tmp1/ US_ROUNDTRIP_CM;
     delay(1000);
 }
 
 void centralScan() {
-    servoBar.write(90); //
-    delay(200); //
+    servoBar.write(CENTER_MOVEMENT);
+    delay(200);
     unsigned int tmp = sonar.ping();
     dist = tmp/ US_ROUNDTRIP_CM;
     delay(1000);

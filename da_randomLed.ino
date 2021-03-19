@@ -2,15 +2,15 @@
 // 1 Led
 // 1 R220
 
-int max_value = 255; // set max_value
-int pin = 5; // pin to use is 5
+const byte MAX_VALUE = 255; // set max_value
+const byte PIN_LED = 5; // pin to use is 5
 
 void setup() {
-   pinMode(pin, OUTPUT);
+   pinMode(PIN_LED, OUTPUT);
 }
 
 void loop() {
     randomSeed(millis());
-    analogWrite(pin, random(max_value));
+    analogWrite(PIN_LED, random(MAX_VALUE));
     delay(50);
 }

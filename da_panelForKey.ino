@@ -23,13 +23,14 @@ byte colPins[COLS]={8,7,6}; // Arduino pins for Columns
 
 char i[4] = {0,0,0,0}; //to store the number of the combination
 char key=0; // to store each press key
-int j=0; // index
-int cont=0; // to ensure only 4 digits will be pressed
+byte j=0; // index
+byte cont=0; // to ensure only 4 digits will be pressed
+const byte PIN_LED=A0; 
 Keypad keypad= Keypad(makeKeymap(keys), rowPins, colPins, ROWS, COLS);
 
 void setup () {
-   Serial.begin(9600);
-   pinMode(A0, OUTPUT);
+   Serial.begin(SERIAL_RATE);
+   pinMode(PIN_LED, OUTPUT);
    lcd.begin(16,2);
    doClose();
    doClean();
@@ -51,7 +52,7 @@ void loop () {
        Serial.println();
        Serial.println("Accepted Key");
        Serial.println();
-       analogWrite(A0,255);
+       doLedON();
        doClean();
        lcd.setCursor(0,0);
        lcd.write("Greetings");
@@ -64,14 +65,14 @@ void loop () {
        delay(4000);
        doClean();
        doStart();
-       analogWrite(A0,0);
+       doLedOFF();
     } else {
        // Authorised Key 2
       if (i[0]=='2' && i[1]=='3' && i[2]=='3' && i[3]=='2') {
        Serial.println();
        Serial.println("Accepted Key");
        Serial.println();
-       analogWrite(A0,255);
+       doLedON();
        doClean();
        lcd.setCursor(0,0);
        lcd.write("Greetings");
@@ -84,7 +85,7 @@ void loop () {
        delay(4000);
        doClean();
        doStart();
-       analogWrite(A0,0);
+       doLedOFF();
      } else {
        Serial.println();
        Serial.println("Wrong Key");
@@ -129,4 +130,12 @@ void doClose() {
    lcd.write("ACCESS");
    lcd.setCursor(0,1);
    lcd.write("CLOSED");
+}
+
+void doLedON() {
+   analogWrite(PIN_LED,255);
+}
+
+void doLedOFF() {
+   analogWrite(PIN_LED,0);
 }

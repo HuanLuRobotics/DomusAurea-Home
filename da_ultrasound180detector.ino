@@ -2,27 +2,30 @@
 // 1 180º servo
 // 1 ultrasound sensor
 
+#include <Constants.h>
 #include <Servo.h>
 #include <NewPing.h>
 
-#define TRIGGER_PIN 7
-#define ECHO_PIN 6
-#define DIST_MAX 200
+
+const byte PIN_TRIGGER=7;
+const byte PIN_ECHO=6;
+const byte PIN_SERVO=4;
+const byte DIST_MAX=200;
 unsigned int tmp; // front distance 
 unsigned int tmp1; // distance to the left side 
 unsigned int tmp2; // distance to the right side
 
-NewPing sonar(TRIGGER_PIN, ECHO_PIN, DIST_MAX);
+NewPing sonar(PIN_TRIGGER, PIN_ECHO, DIST_MAX);
 
 Servo servobar;
 
 void setup() {
-    servobar.attach(4);
-    Serial.begin(9600);
+    servobar.attach(PIN_SERVO);
+    Serial.begin(SERIAL_RATE);
 }
 
 void loop() {
-    servobar.write(90); // servo in the initial position 
+    servobar.write(STOP_MOVEMENT); // servo in the initial position 
     delay(100); //
     tmp=sonar.ping_cm();
     Serial.print("Ping central: ");
@@ -30,7 +33,7 @@ void loop() {
     Serial.println(" cm");
     delay(1000); //
     
-    servobar.write(0); // start movement to left side
+    servobar.write(LEFT_MOVEMENT); // servostart movement to left side
     delay(1000); //
     tmp1=sonar.ping_cm();
     Serial.print("Ping to the left: ");
@@ -38,7 +41,7 @@ void loop() {
     Serial.println(" cm");
     delay(1000); //
 
-    servobar.write(180); // start movement to right side
+    servobar.write(RIGHT_MOVEMENT); // start movement to right side
     delay(1000); //
     tmp2=sonar.ping_cm();
     Serial.print("Ping to the right: ");

@@ -3,16 +3,17 @@
 // 1 TSOP 4838
 // Remote control device
 
+#include <Constants.h>
 #include <IRremote.h>
 #include <LiquidCrystal.h>
 
 LiquidCrystal lcd(8,9,10,11,12,13);
-int RECV_PIN = 4;
-IRrecv ir(RECV_PIN);
+const byte PIN_RECV = 4;
+IRrecv ir(PIN_RECV);
 decode_results results; // to store the remote result
 
 void setup() {
-    Serial.begin(9600);
+    Serial.begin(SERIAL_RATE);
     ir.enableIRIn(); // enable the device
     lcd.begin(16,2);
     lcd.setCursor(0,0);
@@ -32,38 +33,38 @@ void loop() {
         lcd.setCursor(1,0);
         lcd.write("Assigned");
     }
-    if (results.value == 2498985700) { //button 1 pressed
+    if (results.value == BT_NUMBER_1) { //button 1 pressed
        lcd.setCursor(0,0);
        lcd.write("Button 1");
        lcd.setCursor(1,0);
        lcd.write("Activated");
     }
-    if (results.value == 4129126878) { //button 2 pressed
+    if (results.value == BT_NUMER_2) { //button 2 pressed
        lcd.setCursor(0,0);
        lcd.write("Button 2");
        lcd.setCursor(1,0);
        lcd.write("Activated");
     }
-    if (results.value == 2172071812) { //button 3 pressed
+    if (results.value == BT_NUMBER_3) { //button 3 pressed
        lcd.setCursor(0,0);
        lcd.write("Button 3");
        lcd.setCursor(1,0);
        lcd.write("Activated");
     }
-    if (results.value == 1301396414) { //button 4 pressed
+    if (results.value == BT_NUMBER_4) { //button 4 pressed
        lcd.setCursor(0,0);
        lcd.write("Button 4");
        lcd.setCursor(1,0);
        lcd.write("Activated");
     }
-    if (results.value == 3345571616) { //button 5 set LCD Active
+    if (results.value == BT_NUMBER_5) { //button 1 pressed5 set LCD Active
        lcd.display();
        lcd.setCursor(0,0);
        lcd.write("Display");
        lcd.setCursor(1,0);
        lcd.write("Activated");
     }
-    if (results.value == 145526690) { //button 6 set LCD Inactive
+    if (results.value == BT_NUMBER_6) { //button 6 set LCD Inactive
        lcd.setCursor(0,0);
        lcd.write("Display");
        lcd.setCursor(1,0);

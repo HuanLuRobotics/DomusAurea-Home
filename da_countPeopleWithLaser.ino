@@ -1,34 +1,37 @@
-// calculate how many people is insdide a place with a laser
+// calculate how many people is inside a place with a laser
 // 1 Led laser
 // 1 R1KHOhm
 // 1 Led red (for signal)
 
-int laser = 13; // pin 13
-int ldr=A0; // pin Analogic0
+#include <Constants.h>
+
+const byte PIN_LASER = 13;
+const byte PIN_LDR = A0;
+const byte PIN_LED = 4;
 int counter=0; // variable for counter
 int value= 0; // variable for value
-int led=4; // pint 4
+
 
 void setup() {
-    Serial.begin(9600);
-    pinMode (laser,OUTPUT); // pin
-    pinMode (led,OUTPUT); // pin
-    pinMode (ldr,INPUT); // pin
+    Serial.begin(SERIAL_RATE);
+    pinMode (PIN_LASER,OUTPUT); // pin
+    pinMode (PIN_LED,OUTPUT); // pin
+    pinMode (PIN_LDR,INPUT); // pin
 }
 
 void loop() {
-    digitalWrite (laser, HIGH); // set laser one
-    value = analogRead (ldr); // read ldr and store value
+    digitalWrite (PIN_LASER, HIGH); // set laser one
+    value = analogRead (PIN_LDR); // read ldr and store value
     if (value <= 200) {
         counter++; // increment number of persons 
         if (counter == 100) {
             Serial.println("WARNING: MAX NUMBER of persons reached");
         } else {
-            digitalWrite (led, HIGH); // set led for visual warning
+            digitalWrite (PIN_LED, HIGH); // set led for visual warning
             Serial.print(100-counter); // number of persons left
             Serial.println(" still available");
-            delay(2000); // time for a person to pass the entry
-            digitalWrite (led, LOW); // set led off for visual warning
+            delay(TWO_SECONDS); // time for a person to pass the entry
+            digitalWrite (PIN_LED, LOW); // set led off for visual warning
         }
     }
 }
