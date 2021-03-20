@@ -25,9 +25,9 @@ void loop () {
     delay(100);
     
     if (value >=11) {
-        engine.write (GO_MOVEMENT); // enable
+        engine.write (GO_MOVEMENT); // enable if color white is detected
     }
     if (value < 5) {
-        engine.write (STOP_MOVEMENT); // disable
+        engine.write (STOP_MOVEMENT); // disable if color black is detected
     }
 }
