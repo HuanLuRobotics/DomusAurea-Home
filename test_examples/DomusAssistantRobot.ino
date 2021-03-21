@@ -60,11 +60,11 @@ void setup() {
     digitalWrite(PIN_LED_GREEN_8MM, LOW);
     digitalWrite(PIN_LED_GREEN, LOW);
     digitalWrite(PIN_LED_RED, LOW);
-    tone(buzzer, 950,900); // make a sound
+    tone(PIN_BUZZER, 950,900); // make a sound
     delay(200);
-    noTone(buzzer);
+    noTone(PIN_BUZZER);
     delay(200);
-    tone(buzzer, 750,300);
+    tone(PIN_BUZZER, 750,300);
     delay(200);
 }
 
