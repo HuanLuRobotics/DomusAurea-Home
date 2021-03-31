@@ -1,7 +1,40 @@
+/**
+ * Author: Juan Luis Gozalo (juanluis.gozalo@huanLuRobotics.com)
+ * Date: 22/Mar/2021
+ * Version 1.0.0
+ * 
+ * Description: DomusAurea Constants file for the whole project
+ * This file must be located under the library path of the IDE for compilation (including the Directory Name).
+ *
+ **/
+
+#ifndef DOMUSAUREA_CONSTANTS_H
+#define DOMUSAUREA_CONSTANTS_H
+
+#include <Arduino.h>
+
+// Set Debug options
+#ifdef DEBUG_MODE
+#define DEBUG_PRINT(x) Serial.print(x)
+#define DEBUG_PRINTLN(x) Serial.println(x)
+#else
+#define DEBUG_PRINT(x)
+#define DEBUG_PRINTLN(x)
+#endif
+
+// Set High-Low Operation Mode Values
+#ifdef ACTIVE_LOW
+#define MHIGH 0X0
+#define MLOW 0X1
+#else
+#define MHIGH 0X1
+#define MLOW 0X0
+#endif
+
 // Definition of constants to be used across programs
 //
 // General Settings
-const int MAX_DISTANCE = 200 ; // max distance 200 cm
+const int MAX_DISTANCE = 200; // max distance 200 cm
 const int TRIGGER_PIN = 12; // trigger of distance sensor
 const int ECHO_PIN = 11; // echo of distance sensor
 const int SERIAL_RATE=9600; // rate for serial communication
@@ -53,3 +86,5 @@ const unsigned long BT_NUMBER_0=0;
 const int ONE_MINUTE=60000;
 const int ONE_SECOND=1000;
 const int TWO_SECONDS=2000;
+
+#endif

@@ -2,7 +2,7 @@
 // 1 Buzzer (4ohms, 8ohms)
 // 1 R100 or 1 R220 
 
-const byte PIN_BUZZER = A0; // analog pin
+const byte PIN_BUZZER = 3;
 
 void setup () {
     pinMode (PIN_BUZZER, OUTPUT); // set pin as output
