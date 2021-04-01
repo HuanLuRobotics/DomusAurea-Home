@@ -17,9 +17,15 @@
 #ifdef DEBUG_MODE
 #define DEBUG_PRINT(x) Serial.print(x)
 #define DEBUG_PRINTLN(x) Serial.println(x)
+#define DEBUG_PRINT(x,y) Serial.print(x,y)
+#define DEBUG_PRINTLN(x,y) Serial.println(x,y)
+#define DEBUG_LED(x,y) digitalWrite(x,y)
 #else
 #define DEBUG_PRINT(x)
 #define DEBUG_PRINTLN(x)
+#define DEBUG_PRINT(x,y)
+#define DEBUG_PRINTLN(x,y)
+#define DEBUG_LED(x,y)
 #endif
 
 // Set High-Low Operation Mode Values
