@@ -1,4 +1,5 @@
 # DomusAurea-Home
+
 The DomusAurea Domotic application
 .
 This set of Arduino programs are built to control the different elements in a Domotic installation.
@@ -6,6 +7,7 @@ This set of Arduino programs are built to control the different elements in a Do
 It also will include a [Surveillance Robot](https://github.com/HuanLuRobotics/DomusAurea-Assistant) application to handle the supervision of the house
 
 Rules (for Security purpose):
+
 - NO doors will be controlled
 - Preferibly, using X10 protocol and not Wifi protocol to join the elements with the panel
   
@@ -21,6 +23,3 @@ The steps to configure the VisualStudio IDE are:
 - Set the Board (Ctrl-Shift-P and then select Arduino:Board Manager and Arduino:Board Configuration)
 - Set the communication port (COM3 or COM1)
 - Get the Blink.ino example to test the correct communication and installation
-
-
-
