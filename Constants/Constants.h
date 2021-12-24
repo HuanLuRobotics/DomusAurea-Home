@@ -15,10 +15,10 @@
 
 // Set Debug options
 #ifdef DEBUG_MODE
-#define DEBUG_PRINT(x) Serial.print(x)
-#define DEBUG_PRINTLN(x) Serial.println(x)
-#define DEBUG_PRINTF(x,y) Serial.print(x,y)
-#define DEBUG_PRINTLNF(x,y) Serial.println(x,y)
+#define DEBUG_PRINT(x) Serial.print(F(x))
+#define DEBUG_PRINTLN(x) Serial.println(F(x))
+#define DEBUG_PRINTF(x,y) Serial.print(F(x),y)
+#define DEBUG_PRINTLNF(x,y) Serial.println(F(x),y)
 #define DEBUG_LED(x,y) digitalWrite(x,y)
 #else
 #define DEBUG_PRINT(x)
@@ -92,5 +92,7 @@ const unsigned long BT_NUMBER_0=0;
 const int ONE_MINUTE=60000;
 const int ONE_SECOND=1000;
 const int TWO_SECONDS=2000;
+const int HALF_SECOND=500;
+const int QUARTER_SECOND=250;
 
 #endif
